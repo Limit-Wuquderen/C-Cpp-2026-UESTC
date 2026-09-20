@@ -15,7 +15,7 @@ add_executable(p03_all_primes level1/p03_all_primes/main.cpp)
 
 add_executable(p04_hanoi level1/p04_hanoi/main.cpp)
 
-add_executable(p05_maze  level1/p05_maze/main.c)
+add_executable(p05_maze level1/p05_maze/main.cpp)
 
 add_executable(p06_push_boxes  level1/p06_push_boxes/main.c)
 
