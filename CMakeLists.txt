@@ -11,7 +11,7 @@ add_executable(p01_running_letter level1/p01_running_letter/main.cpp
 add_executable(p02_is_prime  level1/p02_is_prime/main.cpp
         level1/p02_is_prime/main.cpp)
 
-add_executable(p03_all_primes  level1/p03_all_primes/main.c)
+add_executable(p03_all_primes level1/p03_all_primes/main.cpp)
 
 add_executable(p04_hanoi  level1/p04_hanoi/main.c)
 
