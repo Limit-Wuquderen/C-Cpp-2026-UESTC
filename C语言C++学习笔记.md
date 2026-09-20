@@ -81,7 +81,7 @@ void digdig(int x, int y) {
 ```
 考虑代码流程：
 ```mermaid
-flowchart TD
+flowchart LR
     A([开始]) --> B[生成地图]
     B --> C[进入循环/输出地图]
     C --> D[输入方向/退出游戏]
