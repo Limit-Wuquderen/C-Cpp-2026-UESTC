@@ -1,9 +1,9 @@
-﻿#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 #include <windows.h>
 #include <conio.h>
 using namespace std;
-const int ROWS = 21, COLS = 21;
-char maze[ROWS][COLS];
+const int WIDTH = 41, HEIGHT = 41;
+char maze[WIDTH][HEIGHT];
 int player_X, player_Y, exit_X, exit_Y, steps;
 mt19937 mt(time(nullptr));
 void digdig(int x, int y) {
@@ -16,24 +16,34 @@ void digdig(int x, int y) {
     }
     for (int i = 0; i <= 3; i++) {
         int nx = x + tx[i], ny = y + ty[i];
-        if (nx > 0 && nx < ROWS && ny > 0 && ny < COLS && maze[nx][ny] == '#') {
+        if (nx > 0 && nx < WIDTH && ny > 0 && ny < HEIGHT && maze[nx][ny] == '#') {
             maze[(x + nx) >> 1][(y + ny) >> 1] = ' ';
             digdig(nx, ny);
         }
     }
 }
 void Generate_Maze() {
-    for (int i = 0; i < ROWS; i++)
-        for (int j = 0; j < COLS; j++)
+    for (int i = 0; i < WIDTH; i++)
+        for (int j = 0; j < HEIGHT; j++)
             maze[i][j] = '#';
     digdig(1, 1);
 }
+void Print_Maze() {
+    for (int i = 0; i < WIDTH; i++) {
+        for (int j = 0; j < HEIGHT; j++) {
+            if (i == player_X && j == player_Y)
+                cout << 'P';
+            else if (i == exit_X && j == exit_Y)
+                cout << 'E';
+            else cout << maze[i][j];
+        }
+        cout << endl;
+    }
+}
 void draw() {
-    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD pos = {0, 0};
-    SetConsoleCursorPosition(hOut, pos);
-    for (int x = 0; x < ROWS; x++) {
-        for (int y = 0; y < COLS; y++) {
+    system("cls");
+    for (int x = 0; x < WIDTH; x++) {
+        for (int y = 0; y < HEIGHT; y++) {
             if (x == player_X && y == player_Y)
                 cout << 'P';  // 玩家
             else if (x == exit_X && y == exit_Y)
@@ -44,7 +54,6 @@ void draw() {
         cout << '\n';
     }
     cout << "\n用方向键移动，按 Q 退出。  已走步数：" << steps << "\n";
-    cout.flush();
 }
 const int KEY_OTHER = 0;
 const int KEY_UP    = 1;
@@ -69,7 +78,7 @@ int readKey() {
 int main() {
     SetConsoleOutputCP(CP_UTF8); //UTF-8
     Generate_Maze();
-    player_X = 1, player_Y = 1, exit_X = ROWS - 2, exit_Y = COLS - 2, steps = 0;
+    player_X = 1, player_Y = 1, exit_X = WIDTH - 2, exit_Y = HEIGHT - 2, steps = 0;
     while (true) {
         draw();
         if (player_X == exit_X && player_Y == exit_Y) {
@@ -83,8 +92,8 @@ int main() {
             return 0;
         }
         int nx = player_X + tx[key], ny = player_Y + ty[key];
-        if (nx > 0 && nx < ROWS && ny > 0 && ny < COLS && maze[nx][ny] == ' ') {
-            player_X = nx, player_Y = ny, steps += (key > 0);
+        if (nx > 0 && nx < WIDTH && ny > 0 && ny < HEIGHT && maze[nx][ny] == ' ') {
+            player_X = nx, player_Y = ny, steps++;
         }
     }
     system("pause");

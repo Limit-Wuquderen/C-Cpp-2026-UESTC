@@ -14,17 +14,19 @@ int main() {
         GetConsoleScreenBufferInfo(screen, &info); //读出当前窗口长
         int width = info.srWindow.Right - info.srWindow.Left + 1;
         int delayMs = 40;
-        system("cls");
+        //system("cls");
         cout<<"\r";
         for (int i = 1; i <= x; i++)
             cout<<" ";
         cout<<text;
+        for (int i = x + (int)text.size(); i < width; i++)
+            cout<<" ";
         cout.flush(); //立即显示
         Sleep(delayMs); //停顿
         x += dir;
         if (x <= 0)
             dir = 1;
-        if (x + text.size() >= width)
+        else if (x + (int)text.size() >= width)
             dir = -1;
     }
     return 0;

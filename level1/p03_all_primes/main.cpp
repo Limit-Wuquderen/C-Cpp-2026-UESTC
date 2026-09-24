@@ -2,16 +2,16 @@
 #include <cstdio>
 #include <chrono>
 using namespace std;
-const int N = 1005;
-bool vis[N];
-int pri[N], tot = 0;
+const int N = 1000;
+bool vis[N + 5];
+int pri[N + 5], tot = 0;
 int main() {
     auto t0 = chrono::steady_clock::now();
-    for (int i = 2; i <= 1000; i++) {
+    for (int i = 2; i <= N; i++) {
         if (!vis[i])
             pri[++tot] = i;
         for (int j = 1; j <= tot; j++) {
-            if (i * pri[j] > 1000)
+            if (i * pri[j] > N)
                 break;
             vis[i * pri[j]] = true;
             if (i % pri[j] == 0)
